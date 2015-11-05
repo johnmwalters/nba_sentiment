@@ -9,7 +9,7 @@ from random import randint
 import os
 import inspect, os
 
-cwd = inspect.getfile(inspect.currentframe())
+cwd = inspect.getfile(inspect.currentframe()) - 'pull_tweets.py'
 
 config = cnfg.load(".twitter_develop")
 #cwd = os.getcwd()
@@ -20,7 +20,7 @@ oauth = OAuth1(config["consumer_key"],
                config["access_token_secret"])
 
 twitter_dict = {}
-with open(cwd + '/twitter_accounts.csv', 'rb') as csvfile:
+with open(cwd + 'twitter_accounts.csv', 'rb') as csvfile:
     twitter_accounts = csv.reader(csvfile, delimiter=',')
     for row in twitter_accounts:
         twitter_dict[row[0]] = row[1]
