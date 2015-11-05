@@ -7,9 +7,12 @@ import cnfg
 import time
 from random import randint
 import os
+import inspect, os
+
+cwd = inspect.getfile(inspect.currentframe())
 
 config = cnfg.load(".twitter_develop")
-cwd = os.getcwd()
+#cwd = os.getcwd()
 
 oauth = OAuth1(config["consumer_key"],
                config["consumer_secret"],
