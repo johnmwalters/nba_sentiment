@@ -6,8 +6,10 @@ from requests_oauthlib import OAuth1
 import cnfg
 import time
 from random import randint
+import os
 
 config = cnfg.load(".twitter_develop")
+cwd = os.getcwd()
 
 oauth = OAuth1(config["consumer_key"],
                config["consumer_secret"],

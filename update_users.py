@@ -6,8 +6,10 @@ from requests_oauthlib import OAuth1
 import cnfg
 import time
 from random import randint
+import os
 
 config = cnfg.load(".twitter_develop")
+cwd = os.getcwd()
 
 oauth = OAuth1(config["consumer_key"],
                config["consumer_secret"],
@@ -15,7 +17,7 @@ oauth = OAuth1(config["consumer_key"],
                config["access_token_secret"])
 
 twitter_dict = {}
-with open('twitter_accounts.csv', 'rb') as csvfile:
+with open(cwd+'/twitter_accounts.csv', 'rb') as csvfile:
     twitter_accounts = csv.reader(csvfile, delimiter=',')
     for row in twitter_accounts:
         twitter_dict[row[0]] = row[1]
