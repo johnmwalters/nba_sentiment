@@ -54,7 +54,7 @@ if len(updated_fields) == 0:
 
 print "Completed Updating Database"
 
-with open("update_users_log.txt", "a") as myfile:
+with open(cwd + "update_users_log.txt", "a") as myfile:
     myfile.write("The following users were added on " + time.asctime() + ":")
     myfile.write("\n")
     myfile.write(str(updated_fields))
