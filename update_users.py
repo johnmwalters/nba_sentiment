@@ -10,7 +10,11 @@ import os
 
 import inspect, os
 
-cwd = inspect.getfile(inspect.currentframe()) - 'update_users.py'
+cwd = inspect.getfile(inspect.currentframe())
+
+file_name =  'update_users.py'
+
+cwd = cwd[0:len(cwd)-len(file_name)]
 
 config = cnfg.load(".twitter_develop")
 #cwd = os.getcwd()

@@ -9,7 +9,11 @@ from random import randint
 import os
 import inspect, os
 
-cwd = inspect.getfile(inspect.currentframe()) - 'pull_tweets.py'
+cwd = inspect.getfile(inspect.currentframe())
+
+file_name = 'pull_tweets.py'
+
+cwd = cwd[0:len(cwd)-len(file_name)]
 
 config = cnfg.load(".twitter_develop")
 #cwd = os.getcwd()
