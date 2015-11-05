@@ -51,7 +51,7 @@ for name, screen_name in twitter_dict.items():
 
 print "Completed Updating Database"
 
-with open("pull_tweets_log.txt", "a") as myfile:
+with open(cwd + "pull_tweets_log.txt", "a") as myfile:
     myfile.write("Number of tweets added on " + time.asctime() + ":")
     myfile.write("\n")
     myfile.write(str(len(updated_fields)) + " Tweets")
