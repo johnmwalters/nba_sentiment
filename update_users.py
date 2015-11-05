@@ -7,6 +7,7 @@ import cnfg
 import time
 from random import randint
 import os
+#from datetime import now
 
 import inspect, os
 
@@ -34,8 +35,11 @@ client = MongoClient()
 db = client.basketball
 users = db.users
 
+updated_fields = []
+
 for name, screen_name in twitter_dict.items():
     if users.find_one({'screen_name':screen_name}) == None:
+        updated_fields.append(screen_name)
         response = requests.get("https://api.twitter.com/1.1/users/show.json?screen_name=" + screen_name,auth=oauth)
         while response.status_code != 200:
             print "Waiting for webpage to respond"
@@ -45,4 +49,20 @@ for name, screen_name in twitter_dict.items():
         user = response.json()
         users.insert(user)
 
+if len(updated_fields) == 0:
+    updated_fields = ['No fields were updated']
+
 print "Completed Updating Database"
+
+with open("update_users_log.txt", "a") as myfile:
+    myfile.write("The following users were added on " + time.asctime() + ":")
+    myfile.write("\n")
+    myfile.write(str(updated_fields))
+    myfile.write("\n")
+
+
+
+
+
+
+

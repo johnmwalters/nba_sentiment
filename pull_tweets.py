@@ -33,6 +33,8 @@ client = MongoClient()
 db = client.basketball
 tweets = db.tweets
 
+updated_fields = []
+
 for name, screen_name in twitter_dict.items():
     response = requests.get("https://api.twitter.com/1.1/statuses/user_timeline.json?count=200&screen_name="+screen_name,auth=oauth)
     while response.status_code != 200:
@@ -48,3 +50,18 @@ for name, screen_name in twitter_dict.items():
             print "Tweet exists in Database: " + status['id_str']
 
 print "Completed Updating Database"
+
+with open("pull_tweets_log.txt", "a") as myfile:
+    myfile.write("Number of tweets added on " + time.asctime() + ":")
+    myfile.write("\n")
+    myfile.write(str(len(updated_fields)) + " Tweets")
+    myfile.write("\n")
+
+
+
+
+
+
+
+
+
