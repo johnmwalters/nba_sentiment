@@ -46,6 +46,7 @@ for name, screen_name in twitter_dict.items():
     for status in tweet:
         if tweets.find_one({'id_str':status['id_str']}) == None:
             tweets.insert(status)
+            updated_field.append(status['id_str'])
         else:
             print "Tweet exists in Database: " + status['id_str']
 
