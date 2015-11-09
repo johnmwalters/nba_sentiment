@@ -29,7 +29,7 @@ twitter_dict = {}
 with open(cwd+'twitter_accounts.csv', 'rb') as csvfile:
     twitter_accounts = csv.reader(csvfile, delimiter=',')
     for row in twitter_accounts:
-        twitter_dict[row[0]] = row[1]
+        twitter_dict[row[0]] = [row[1], row[2]
         
 client = MongoClient()
 db = client.basketball
@@ -37,7 +37,8 @@ users = db.users
 
 updated_fields = []
 
-for name, screen_name in twitter_dict.items():
+for name, name_info in twitter_dict.items():
+    screen_name = name_info[0]
     if users.find_one({'screen_name':screen_name}) == None:
         updated_fields.append(screen_name)
         response = requests.get("https://api.twitter.com/1.1/users/show.json?screen_name=" + screen_name,auth=oauth)
