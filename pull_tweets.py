@@ -27,7 +27,7 @@ twitter_dict = {}
 with open(cwd + 'twitter_accounts.csv', 'rb') as csvfile:
     twitter_accounts = csv.reader(csvfile, delimiter=',')
     for row in twitter_accounts:
-        twitter_dict[row[0]] = row[1]
+        twitter_dict[row[0]] = [row[1], row[2]]
         
 client = MongoClient()
 db = client.basketball
@@ -35,7 +35,8 @@ tweets = db.tweets
 
 updated_fields = []
 
-for name, screen_name in twitter_dict.items():
+for name, name_info in twitter_dict.items():
+    screen_name = name_info[0]
     response = requests.get("https://api.twitter.com/1.1/statuses/user_timeline.json?count=200&screen_name="+screen_name,auth=oauth)
     while response.status_code != 200:
         print "Waiting for webpage to respond"
