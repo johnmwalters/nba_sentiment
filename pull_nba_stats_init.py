@@ -17,7 +17,7 @@ from datetime import timedelta
 Determine file path so script can run in cron
 '''
 cwd = inspect.getfile(inspect.currentframe())
-file_name = 'pull_nba_stats.py'
+file_name = 'pull_nba_stats_init.py'
 cwd = cwd[0:len(cwd)-len(file_name)]
 
 '''
